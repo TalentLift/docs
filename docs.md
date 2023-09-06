@@ -1,5 +1,6 @@
 ```mermaid
-    flowchart TD             
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart TD                       
     subgraph "`**Platform Registration**`"
     A(Candidate) --> B[Register on Platform]
     B --> C(User registers witht their email)
@@ -52,8 +53,7 @@
     N1 --> Q1(Declines to proceed)
     end
     subgraph "`**Interview Offer**`"
-    O1-.->R1(Schedule a volunteer interview. 
-    Tag=Schedule volunteer interview)
+    O1-.->R1(Schedule a volunteer interview. Set tag to Schedule volunteer interview)
     P1-.->R1
     end
     subgraph "`**Interview**`"
@@ -66,7 +66,7 @@
     end
     subgraph "`**Legal Flow**`"
     U1 & V1 --> W1(Recruitment Informs Legal about a Job Offer)
-    W1 --> X1(Matter or database card is created: OINP… EMPP Stream A… EMPP Stream B… NLPNP)
+    W1 --> X1(Matter or database card is created: OINP, EMPP Stream A, EMPP Stream B, NLPNP)
     X1-.->Y1(Folders are created)
     style Y1 fill:#8bc34a,stroke:#333,stroke-width:2px
     X1 --> Z1(Legal Makes a Decision)
