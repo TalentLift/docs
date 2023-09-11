@@ -18,14 +18,14 @@
             K --> |No or Position Closed| L(Decline)
             G --> M(Upskilling Opportunities)
             end
-            subgraph "`**Internal Shortlist**`"
+            subgraph CS["`**Candidate Search**`"]
+            CS1(Candidate Search) --> CS2(Search)
+            CS1 --> CS3(Database Search)
+            CS1 --> CS4(Excel Sheets, Google Drive, etc.)
+            end
+            subgraph IS["`**Internal Shortlist**`"]
             K --> |Yes| S
-            S(Internal Shortlist) --> T(Search)
-            S --> U(Database Search)
-            S --> V(Excel Sheets, Google Drive, etc.)
-            U --> W(Import Profile)
-            T --> W 
-            V --> W
+            S(Internal Shortlist) --> W(Import Profile)
             W --> X(Create a Job Match)
             X --> Y(Internal Shortlist)
             Y --> Z(Intake)
@@ -68,7 +68,7 @@
             end
             subgraph "`**Legal Flow**`"
             U1 & V1 --> W1(Recruitment Informs Legal about a Job Offer)
-            W1 --> X1(Matter or database card is created: OINP, EMPP Stream A, EMPP Stream B, NLPNP)
+            W1 --> X1(Matter or database card is created: OINP… EMPP Stream A… EMPP Stream B… NLPNP)
             X1-.->Y1(Folders are created)
             style Y1 fill:#8bc34a,stroke:#333,stroke-width:2px
             X1 --> Z1(Legal Makes a Decision)
@@ -81,7 +81,7 @@
             D2 --> E2(Settlement team complete user details)
             E2 --> F2(Tasks are generated to be followed by Settlement team)
             end
-            click A callback "Tooltip"
+            CS --> IS
     </pre>
 
     <script type="module">
@@ -90,9 +90,6 @@
         width: "100%",
       };
 
-      const callback = function () {
-        alert("A callback was triggered");
-      };
       mermaid.initialize({
         startOnLoad: true,
         securityLevel: "loose",
