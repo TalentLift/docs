@@ -80,6 +80,8 @@
             subgraph "`**Settlement Flow**`"
             D2 --> E2(Settlement team complete user details)
             E2 --> F2(Tasks are generated to be followed by Settlement team)
+            F2-.->G2(Folders are created)
+            style G2 fill:#8bc34a,stroke:#333,stroke-width:2px
             end
             CS --> IS
     </pre>
