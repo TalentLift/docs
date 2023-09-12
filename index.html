@@ -3,7 +3,7 @@
     <h1 style="text-align: center">Seek a Job</h1>
     <pre class="mermaid">
             flowchart TD             
-            subgraph "`**Platform Registration**`"
+            subgraph PR["`**Platform Registration**`"]
             A(Candidate) --> B[Register on Platform]
             B --> C(User registers witht their email)
             C --> D(User accepts terms and conditions)
@@ -16,6 +16,7 @@
             H --> |No| G
             I --> K[/EOI Valid?/]
             K --> |No or Position Closed| L(Decline)
+            K ----> |Yes| PR_IS(Internal Shortlist)
             G --> M(Upskilling Opportunities)
             end
             subgraph CS["`**Candidate Search**`"]
@@ -24,7 +25,6 @@
             CS1 --> CS4(Excel Sheets, Google Drive, etc.)
             end
             subgraph IS["`**Internal Shortlist**`"]
-            K --> |Yes| S
             S(Internal Shortlist) --> W(Import Profile)
             W --> X(Create a Job Match)
             X --> Y(Internal Shortlist)
@@ -47,28 +47,26 @@
             style K1 fill:#ff9800,stroke:#333,stroke-width:2px
             K1 --> L1(Tag is set to: Ready for Employer)
             end
-            subgraph "`**Shortlist**`"
-            L1 --> M1(Manual Email to Employer with shortlist)
-            M1 --> N1(Employer responds)
+            subgraph SL["`**Shortlist**`"]
+            M1(Manual Email to Employer with shortlist) --> N1(Employer responds)
             N1 --> O1(Interview one or more candidates)
             N1 --> P1(Another round of candidates)
             N1 --> Q1(Declines to proceed)
             end
-            subgraph "`**Interview Offer**`"
+            subgraph IO["`**Interview Offer**`"]
             O1-.->R1(Schedule a volunteer interview. Tag=Schedule volunteer interview)
             P1-.->R1
             end
-            subgraph "`**Interview**`"
-            R1 --> S1(Job Offer)
-            R1 --> T1(Unsuccessful)
+            subgraph IV["`**Interview**`"]
+            S1(Job Offer)
+            T1(Unsuccessful)
             end
-            subgraph "`**Job Offer**`"
+            subgraph JO["`**Job Offer**`"]
             S1 --> U1(Employer Invoice)
             S1 --> V1(Set tag=Job Offer Signed)
             end
-            subgraph "`**Legal Flow**`"
-            U1 & V1 --> W1(Recruitment Informs Legal about a Job Offer)
-            W1 --> X1(Matter or database card is created: OINP… EMPP Stream A… EMPP Stream B… NLPNP)
+            subgraph LF["`**Legal Flow**`"]
+            W1(Recruitment Informs Legal about a Job Offer) --> X1(Matter or database card is created: OINP… EMPP Stream A… EMPP Stream B… NLPNP)
             X1-.->Y1(Folders are created)
             style Y1 fill:#8bc34a,stroke:#333,stroke-width:2px
             X1 --> Z1(Legal Makes a Decision)
@@ -77,26 +75,75 @@
             B2 --> C2(Status is changed to submitted)
             C2 --> D2(Candidate is approved for PR)
             end
-            subgraph "`**Settlement Flow**`"
+            subgraph SF["`**Settlement Flow**`"]
             D2 --> E2(Settlement team complete user details)
             E2 --> F2(Tasks are generated to be followed by Settlement team)
             F2-.->G2(Folders are created)
             style G2 fill:#8bc34a,stroke:#333,stroke-width:2px
             end
+            subgraph SH["`**Start Hiring**`"]
+            ST(Start Hiring) --> SHC(Website Contact)
+            ST --> EDR(Employer Directly Contacts)
+            SHC(Contact) --> IPL(IP Look-up)
+            IPL --> CA(CA or US: Have a second look)
+            IPL --> GE(Generic Email, Otherwise)
+            CA --> GEE(Generic Email to Employers)
+            EDR --> ASP[(Add as prospect)]
+            ASP-.->EF(Folders Created)
+            style EF fill:#8bc34a,stroke:#333,stroke-width:2px
+            ASP-.->PA(Agreement Created)
+            style PA fill:#8bc34a,stroke:#333,stroke-width:2px
+            GEE --> ASP
+            ASP --> RP(Recruitment Pitch)
+            RP --> SH_PS[/Pitch Successful?/]
+            SH_PS --> SH_PR(Position created)
+            SH_PR --> SH_JP(Job saved as PDF)
+            SH_JP --> SH_PW(Pathway ID)
+            SH_PW --> SH_ST(Employer=Active)
+            SH_ST --> SH_JM(Ready for Job Matching)
+            end
+            subgraph SP["`**Source Partners**`"]
+            SP_PP(Potential Partners) --> SP_AA(Alignment Assessment)
+            SP_AA --> SP_RP[(Record as Prospect)]
+            SP_RP --> SP_SC(Sanctions Checklist)
+            SP_RP --> SP_MOU(MoU is signed)
+            SP_MOU --> SP_SA[(Set Partner as Active)]
+            SP_SA-.->SP_DB[(Active Employers)]
+            end
+            PR ----> IS
             CS --> IS
+            SH --> CS
+            IS ----> SL
+            IO --> IV
+            JO ----> LF
+            SF ~~~~~~ SP
+
+            click ASP "https://database.talentlift.ca/talentdatabasev2/prospective-employers" "Link to DB" _blank
+            click SP_SC "https://docs.google.com/document/d/1dxa2mDoOqQU1tTejkAYUc7MmGZPr1ptcWc797cEU__4/edit" "Sanction Checklist" _blank
+            click SP_DB "https://airtable.com/appm3mWV5hCuPYzzE/pagiQab4eF3MV22lM?cobu2=recZWFkzksvRL4sGm" "List of active employers" _blank
+            click B "https://platform.talentlift.ca/" "Platform Registration" _blank
+            click I "https://airtable.com/appx8iQRYwO6h2hIG/tbluzB9OjjEKPmvOf/viwlJupNkcuO2WIUr?blocks=hide" "List of Expression of Interest" _blank
+
+            style ASP fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+            style SP_SC fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+            style SP_DB fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+            style B fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+            style I fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+
     </pre>
 
     <script type="module">
       import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-      mermaid.flowchartConfig = {
-        width: "100%",
-      };
 
-      mermaid.initialize({
+      const callback = function () {
+        alert("A callback was triggered");
+      };
+      const config = {
         startOnLoad: true,
-        securityLevel: "loose",
         flowchart: { useMaxWidth: true, htmlLabels: true },
-      });
+        securityLevel: "loose",
+      };
+      mermaid.initialize(config);
     </script>
   </body>
 </html>
