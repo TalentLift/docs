@@ -26,8 +26,10 @@
             end
             subgraph IS["`**Internal Shortlist**`"]
             S(Internal Shortlist) --> W(Import Profile)
+            W-.->IS_FC(Folders created)
             W --> X(Create a Job Match)
             X --> Y(Internal Shortlist)
+            Y-.->IS_TP[(Tagging in the DB)]
             Y --> Z(Intake)
             Z --> A1("`Job match is set to **Internal Shortlist**`")
             Z --> B1("`Status is set to **Intake**`")
@@ -66,7 +68,10 @@
             S1 --> V1(Set tag=Job Offer Signed)
             end
             subgraph LF["`**Legal Flow**`"]
-            W1(Recruitment Informs Legal about a Job Offer) --> X1(Matter or database card is created: OINP… EMPP Stream A… EMPP Stream B… NLPNP)
+            LF_OS[(One way sync)] --> W1(Recruitment Informs Legal about a Job Offer)
+            W1 --> X1(Matter or database card is created: OINP… EMPP Stream A… EMPP Stream B… NLPNP)
+            X1-.->LF_MD[(Latest Matters)]
+            X1-.->LF_MA(Legal Automation Flow)
             X1-.->Y1(Folders are created)
             style Y1 fill:#8bc34a,stroke:#333,stroke-width:2px
             X1 --> Z1(Legal Makes a Decision)
@@ -76,8 +81,10 @@
             C2 --> D2(Candidate is approved for PR)
             end
             subgraph SF["`**Settlement Flow**`"]
-            D2 --> E2(Settlement team complete user details)
+            D2 --> SF_SS[(Settlement Starts)]
+            SF_SS --> E2(Settlement team complete user details)
             E2 --> F2(Tasks are generated to be followed by Settlement team)
+            F2 --> SF_TB[(Settlement Rundown)]
             F2-.->G2(Folders are created)
             style G2 fill:#8bc34a,stroke:#333,stroke-width:2px
             end
@@ -124,6 +131,13 @@
             click SP_DB "https://airtable.com/appm3mWV5hCuPYzzE/pagiQab4eF3MV22lM?cobu2=recZWFkzksvRL4sGm" "List of active employers" _blank
             click B "https://platform.talentlift.ca/" "Platform Registration" _blank
             click I "https://airtable.com/appx8iQRYwO6h2hIG/tbluzB9OjjEKPmvOf/viwlJupNkcuO2WIUr?blocks=hide" "List of Expression of Interest" _blank
+            click IS_FC "https://drive.google.com/drive/u/0/folders/1itJXLuyjQTVzu9OrCDbfT8HkcQLMuzww" "Candidates Folder" _blank
+            click IS_TP "https://airtable.com/appm3mWV5hCuPYzzE/pag76k59NzDun5O1I?OASbS=b%3AeyJSUjRKNiI6W1swLCJzZWxTZFJFcTZRUzduVXN6TCJdXX0&TPcu0=reccLCu1c3ly3Eg71" "Tagging in the DB" _blank
+            click LF_OS "https://airtable.com/app3tL6X0eDPwIVBU/tblkMqVcXZ2RdAhmE/viwvBDS6SxKCCjOTw?blocks=hide" "One way sync" _blank
+            click LF_MD "https://airtable.com/app3tL6X0eDPwIVBU/pag8pWnjqor7gYclK" "Latest matters in the DB" _blank
+            click LF_MA "https://us1.make.com/149374/scenarios/536663/edit" "Legal automation flow" _blank
+            click SF_SS "https://airtable.com/app6Ia6wPYqE3di0i/tblAA54REMV1Ho43L/viwiauVyrVxMGT6hj?blocks=hide" "Settlement Starts" _blank
+            click SF_TB "https://airtable.com/app6Ia6wPYqE3di0i/pagpgbsIdjcOfFfzg" "Settlement rundown" _blank
 
             style ASP fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
             style SP_SC fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
@@ -131,6 +145,13 @@
             style B fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
             style I fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
 
+            style IS_FC fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+            style IS_TP fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+            style LF_OS fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+            style LF_MD fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+            style LF_MA fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+            style SF_SS fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+            style SF_TB fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
     </pre>
 
     <script type="module">
