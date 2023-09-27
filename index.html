@@ -5,10 +5,10 @@
             flowchart TD             
             subgraph PR["`**Platform Registration**`"]
             A(Candidate) --> B[Register on Platform]
-            B --> C(User registers witht their email)
+            B --> C(User registers with their email)
             C --> D(User accepts terms and conditions)
             D-.->E(User Receives a Welcome Email)
-            style E fill:#ff9800,stroke:#333,stroke-width:2px
+            style E fill:#54C8F3,stroke:#333,stroke-width:2px
             E --> F(User completes their profile)
             F --> G[/User sees the Dashboard/]
             G --> H[/Are there open jobs?/]
@@ -34,7 +34,7 @@
             Z --> A1("`Job match is set to **Internal Shortlist**`")
             Z --> B1("`Status is set to **Intake**`")
             A1-.->C1(User Receives an Intake Scheduling Email)
-            style C1 fill:#ff9800,stroke:#333,stroke-width:2px
+            style C1 fill:#54C8F3,stroke:#333,stroke-width:2px
             B1-.->C1
             C1 --> D1(User Schedules the Intake)
             D1 --> E1(Intake is completed)
@@ -43,10 +43,10 @@
             F1 --> G1(Confirmation of Interest)
             G1 --> H1(Set the Confirmation of Interest tag)
             H1-.->I1(User receives an Email)
-            style I1 fill:#ff9800,stroke:#333,stroke-width:2px
+            style I1 fill:#54C8F3,stroke:#333,stroke-width:2px
             I1 --> J1(CV Development)
             J1-.->K1(Candidates receive an email requesting to update their CV and email it back)
-            style K1 fill:#ff9800,stroke:#333,stroke-width:2px
+            style K1 fill:#54C8F3,stroke:#333,stroke-width:2px
             K1 --> L1(Tag is set to: Ready for Employer)
             end
             subgraph SL["`**Shortlist**`"]
@@ -73,7 +73,7 @@
             X1-.->LF_MD[(Latest Matters)]
             X1-.->LF_MA(Legal Automation Flow)
             X1-.->Y1(Folders are created)
-            style Y1 fill:#8bc34a,stroke:#333,stroke-width:2px
+            style Y1 fill:#54C8F3,stroke:#333,stroke-width:2px
             X1 --> Z1(Legal Makes a Decision)
             Z1 --> A2(Candidate is invited to Slack)
             Z1 --> B2(Depending on Matter, Legal submit the forms)
@@ -86,7 +86,7 @@
             E2 --> F2(Tasks are generated to be followed by Settlement team)
             F2-.->SF_TB[(Settlement Rundown)]
             F2-.->G2(Folders are created)
-            style G2 fill:#8bc34a,stroke:#333,stroke-width:2px
+            style G2 fill:#54C8F3,stroke:#333,stroke-width:2px
             end
             subgraph SH["`**Start Hiring**`"]
             ST(Start Hiring) --> SHC(Website Contact)
@@ -97,9 +97,9 @@
             CA --> GEE(Generic Email to Employers)
             EDR --> ASP[(Add as prospect)]
             ASP-.->EF(Folders Created)
-            style EF fill:#8bc34a,stroke:#333,stroke-width:2px
+            style EF fill:#54C8F3,stroke:#333,stroke-width:2px
             ASP-.->PA(Agreement Created)
-            style PA fill:#8bc34a,stroke:#333,stroke-width:2px
+            style PA fill:#54C8F3,stroke:#333,stroke-width:2px
             GEE --> ASP
             ASP --> RP(Recruitment Pitch)
             RP --> SH_PS[/Pitch Successful?/]
@@ -117,6 +117,15 @@
             SP_MOU --> SP_SA[(Set Partner as Active)]
             SP_SA-.->SP_DB[(Active Employers)]
             end
+            subgraph SCH["`**Search Data Pipeline**`"]
+            SH_SH(Search) --> SH_CR[(Configure Staging and Production)]
+            SH_CR --> SH_AA(Airbyte)
+            SH_AA --> SH_CS(Configure Source and Destination)
+            SH_AA --> SH_CC(Create connections - between Source and Destination)
+            SH_CC --> SH_TM(Develop the transformation models on Dbt)
+            SH_TM --> SH_TS(Push everything to typesense)
+            SH_TS --> SH_APP(Search App)
+            end
             PR ----> IS
             CS --> IS
             SH --> CS
@@ -125,6 +134,7 @@
             JO ----> LF
             SF ~~~~~~ SP
             SP --> CS
+            SCH ----> CS
 
             click ASP "https://database.talentlift.ca/talentdatabasev2/prospective-employers" "Link to DB" _blank
             click SP_SC "https://docs.google.com/document/d/1dxa2mDoOqQU1tTejkAYUc7MmGZPr1ptcWc797cEU__4/edit" "Sanction Checklist" _blank
@@ -138,20 +148,22 @@
             click LF_MA "https://us1.make.com/149374/scenarios/536663/edit" "Legal automation flow" _blank
             click SF_SS "https://airtable.com/app6Ia6wPYqE3di0i/tblAA54REMV1Ho43L/viwiauVyrVxMGT6hj?blocks=hide" "Settlement Starts" _blank
             click SF_TB "https://airtable.com/app6Ia6wPYqE3di0i/pagpgbsIdjcOfFfzg" "Settlement rundown" _blank
+            click SH_AA "https://cloud.airbyte.com/workspaces/8da841dc-0c08-4715-a16c-98b7b262e4eb/connections" "Airbyte" _blank
 
-            style ASP fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
-            style SP_SC fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
-            style SP_DB fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
-            style B fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
-            style I fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+            style ASP fill:#54C8F3,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+            style SP_SC fill:#54C8F3,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+            style SP_DB fill:#54C8F3,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+            style B fill:#54C8F3,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+            style I fill:#54C8F3,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
 
-            style IS_FC fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
-            style IS_TP fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
-            style LF_OS fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
-            style LF_MD fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
-            style LF_MA fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
-            style SF_SS fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
-            style SF_TB fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+            style IS_FC fill:#54C8F3,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+            style IS_TP fill:#54C8F3,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+            style LF_OS fill:#54C8F3,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+            style LF_MD fill:#54C8F3,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+            style LF_MA fill:#54C8F3,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+            style SF_SS fill:#54C8F3,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+            style SF_TB fill:#54C8F3,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+            style SH_AA fill:#54C8F3,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
     </pre>
 
     <script type="module">
